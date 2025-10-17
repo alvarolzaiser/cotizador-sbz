@@ -257,6 +257,10 @@ class CotizacionController extends Controller
             . '&clave=web3007'
             . '&dato=enviodocumento';
 
+        // Finalizar ejecucion aqui hasta tener url valida
+        exit();
+        die();
+
         try {
             $response = Http::withHeaders([
                 'Content-Type' => 'application/xml; charset=UTF-8',

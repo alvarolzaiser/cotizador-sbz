@@ -28,13 +28,13 @@ class FillProductosTable extends Command
     public function handle()
     {
         $this->info('Iniciando proceso XML...');
-        $apiUrl = 'http://dw01.ddns.net:7780/AppAndroid/servlet/ServletAndroid';
-        $query = [
-            'empresa' => 'plin',
-            'usuario' => 'consultaweb',
-            'clave'   => 'web3007',
-            'dato'    => 'productoswebestandar',
-        ];
+        $apiUrl = 'https://centrosbz.com/articulos.xml';
+        // $query = [
+        //     'empresa' => 'plin',
+        //     'usuario' => 'consultaweb',
+        //     'clave'   => 'web3007',
+        //     'dato'    => 'productoswebestandar',
+        // ];
 
         // Parámetros de lote
         $batchSize = 100;
@@ -44,7 +44,8 @@ class FillProductosTable extends Command
         $skusApi = [];
 
         // 1) Obtenemos el XML como stream
-        $response = Http::get($apiUrl, $query);
+        // $response = Http::get($apiUrl, $query); // Con $query si hay parámetros
+        $response = Http::get($apiUrl);
         if (! $response->successful()) {
             $this->error("Error al obtener XML: {$response->status()}");
             return 1;

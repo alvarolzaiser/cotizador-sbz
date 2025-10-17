@@ -282,22 +282,42 @@ const formatCurrency = (value) => {
                                 <div class="space-y-3 mb-8">
                                     <div v-for="detalle in form.detalles" :key="detalle.producto_id" class="flex items-center flex-col sm:flex-row justify-between p-2 bg-gray-50 rounded-lg border border-gray-200">
                                         <div class="flex flex-col items-start w-full">
-                                            <p class="font-semibold text-gray-700">{{ detalle.producto.titulo }}</p>
-                                            <p class="text-sm text-gray-500">Precio Unitario: {{ formatCurrency(detalle.precio_unitario) }}</p>
+                                            <p class="font-semibold text-gray-700">
+                                                {{ detalle.producto.titulo }}
+                                                <span class="text-gray-500 font-light text-sm">{{ detalle.producto.codigo }}</span>
+                                            </p>
+                                            <p class="text-sm text-gray-500">
+                                                Precio Unitario: {{ formatCurrency(detalle.precio_unitario) }} | 
+                                                <span class="text-green-700">{{ detalle.producto.stock }} und.</span>
+                                            </p>
+                                            <p v-if="detalle.cantidad === detalle.producto.stock" class="text-yellow-600 text-xs text-center">Stock máximo</p>
+                                            <p v-if="detalle.cantidad > detalle.producto.stock" class="text-red-700 text-xs text-center">Stock excedido</p>
                                         </div>
                                         <div class="flex flex-col sm:flex-row items-center gap-4 mt-2 sm:mt-0">
                                             <div class="flex items-center gap-4">
                                                 <label class="flex items-center gap-2 text-sm">
                                                     Cantidad:
-                                                    <input type="number" v-model="detalle.cantidad" min="1" class="w-20 text-center border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                                    <input 
+                                                        type="number" 
+                                                        v-model="detalle.cantidad" 
+                                                        min="1" 
+                                                        :max="detalle.producto.stock"
+                                                        class="w-20 text-center border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                                    >
                                                 </label>
                                                 <label class="flex items-center gap-2 text-sm">
                                                     Precio:
-                                                    <input type="number" v-model="detalle.precio_unitario" min="1" class="w-28 text-center border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                                    <input 
+                                                        type="number" 
+                                                        v-model="detalle.precio_unitario" 
+                                                        readonly 
+                                                        min="1" 
+                                                        class="w-28 text-center border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                                                    >
                                                 </label>
                                             </div>
                                             <div class="w-full sm:w-auto flex place-content-between gap-4">
-                                                <p class="text-right font-medium text-gray-700">Subtotal: ${{ (detalle.precio_unitario * detalle.cantidad).toFixed(2) }}</p>
+                                                <p class="text-right font-medium text-gray-700">Subtotal: {{ formatCurrency((detalle.precio_unitario * detalle.cantidad).toFixed(2)) }}</p>
                                                 <button @click="eliminarProducto(detalle.producto_id)" class="text-red-500 hover:text-red-700 transition-transform transform hover:scale-110">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                                                 </button>
@@ -324,7 +344,7 @@ const formatCurrency = (value) => {
 
                                 <!-- 3. Total -->
                                 <div class="mt-6 text-center sm:text-right border-t pt-4">
-                                    <p class="text-2xl font-bold text-gray-800">Total: ${{ totalEditado.toFixed(2) }}</p>
+                                    <p class="text-2xl font-bold text-gray-800">Total: {{ formatCurrency(totalEditado.toFixed(2)) }}</p>
                                     <!-- Acciones principales abajo -->
                                     <div class="flex justify-center sm:justify-end gap-2 mt-4">
                                         <template v-if="isEditing">

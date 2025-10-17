@@ -29,7 +29,7 @@ class UpdateProductosTable extends Command
     {
         $this->info('Iniciando el proceso de llenado de la tabla productos');
 
-        $apiURL = 'https://golosinasplin.com.ar/wp-json/custom/v1/items';
+        $apiURL = 'https://centrosbz.com/wp-json/custom/v1/items';
 
         try {
             $page = 1;

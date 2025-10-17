@@ -83,7 +83,7 @@ export const useCartStore = defineStore('cart', {
             }).join(''); // El método 'join()' => Combina todos los strings generados por 'map()' en un único string. El Parámetro `('')`: Indica que no haya separación entre los elementos (ya que cada detalle ya termina con \n\n). Si colocaramos `('-')`, cada elemento del map() estaría separado por un "-"
         
             return ( 
-                `Cotización #${cotizacion.value.id} de golosinasplin.com.ar \n\n` +
+                `Cotización #${cotizacion.value.id} de centrosbz.com \n\n` +
                 detalles +
                 (incluirTotal 
                             ? 
@@ -125,7 +125,7 @@ export const useCartStore = defineStore('cart', {
                     : detalle.producto.codigo;
             }).join(',');
 
-            return `https://golosinasplin.com.ar/?add=${products}`;
+            return `https://centrosbz.com/?add=${products}`;
         }
     },
 });
