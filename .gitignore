@@ -1,0 +1,23 @@
+/.phpunit.cache
+/node_modules
+# /public/build => Asegura que se suban los assets compilados (y no necesitamos enviar los node_modules al server)
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+# /vendor => La práctica estándar es ignorar /vendor y ejecutar composer install --no-dev en el servidor, pero en tu server no podes ejecutar comandos
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/auth.json
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
