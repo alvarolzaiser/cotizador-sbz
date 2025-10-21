@@ -251,15 +251,11 @@ class CotizacionController extends Controller
         $xml .= '<sTransporte__id>0</sTransporte__id>';
         $xml .= '</documento>';
 
-        $url = 'http://dw01.ddns.net:7780/AppRest/servlet/ServletAndroid'
-            . '?empresa=plin'
+        $url = 'http://sa05.ddns.net:7780/AppRest/servlet/ServletAndroid'
+            . '?empresa=centrosbz'
             . '&usuario=consultaweb'
             . '&clave=web3007'
             . '&dato=enviodocumento';
-
-        // Finalizar ejecucion aqui hasta tener url valida
-        exit();
-        die();
 
         try {
             $response = Http::withHeaders([
