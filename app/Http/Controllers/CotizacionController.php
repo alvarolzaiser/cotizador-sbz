@@ -26,20 +26,35 @@ class CotizacionController extends Controller
     public function index()
     {
         // Obtengo todas las cotizaciones (junto a los datos asociados que tiene, detalles, usuario que la creo, cliente que la solicitó, etc)
-        $cotizaciones = Cotizacion::query()
-                                    ->orderBy('created_at', 'desc')
-                                    ->with([
-                                        'detalles' => function($query) {
-                                            $query->with('producto');
-                                        }, 
-                                        'user', 
-                                        'cliente'
-                                    ])
-                                    ->get();
+        $cotizaciones_user = Cotizacion::query()
+                                // Mostrar solo las cotizaciones propias
+                                ->where('user_id', auth()->user()->id)
+                                ->orderBy('created_at', 'desc')
+                                ->with([
+                                    'detalles' => function($query) {
+                                        $query->with('producto');
+                                    }, 
+                                    'user', 
+                                    'cliente'
+                                ])
+                                ->get();
+
+        // Cotizaciones para el admin
+        $cotizaciones_admin = Cotizacion::query()
+                                ->orderBy('created_at', 'desc')
+                                ->with([
+                                    'detalles' => function($query) {
+                                        $query->with('producto');
+                                    }, 
+                                    'user', 
+                                    'cliente'
+                                ])
+                                ->get();
 
         return Inertia::render('Cotizaciones/Index', [
             // Le paso todas las cotizaciones a mi vista
-            'cotizaciones' => $cotizaciones,
+            'cotizaciones' => $cotizaciones_user,
+            'cotizaciones_admin' => $cotizaciones_admin,
         ]);
     }
 

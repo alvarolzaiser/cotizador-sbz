@@ -16,21 +16,19 @@ dayjs.locale("es"); // Configura dayjs en español
 
 
 // Guardo en 'cotizaciones' la prop "cotizaciones" que me llega en esta URL o PAGE
-const cotizaciones = ref(usePage().props.cotizaciones);
-// // Guardo la instancia de mi carrito en la const 'cartStore' => desde allí llamaré a mis actions, state's, etc
-// const cartStore = useCartStore();
-// // En esta pagina msgWP va a ser un objeto vacío, y luego en el forEach de abajo, voy agregando elementos al objeto en base a la cantidad de cotizaciones que tengo, por cada cotización, le agrego un elemento al objeto 'msgWP' y el indice de ese elemento que agrego al objeto 'msgWP' es el ID de la cotizacion, de esa manera, puedo luego cuando recorro las cotizaciones, rescatar el msgWP que le corresponde a esa cotización por su ID
-// const msgWP = ref({});
-// onMounted(async() => {
-//     try {
-//         for (const cotizacion of cotizaciones.value) {
-//             console.log(cotizacion);
-//             msgWP.value[cotizacion.id] = await cartStore.msgWPF(cotizacion);
-//         };
-//     } catch (err) {
-//         console.error(err);
-//     }
-// });
+const cotizaciones_user = ref(usePage().props.cotizaciones);
+const cotizaciones_admin = ref(usePage().props.cotizaciones_admin);
+
+// Guardo en 'isAdmin' si el usuario tiene en true o 1 el campo 'is_admin'
+const isAdmin = ref(usePage().props.auth.user.is_admin);
+
+// Inicilizo las cotizacion como un array vacío
+const cotizaciones = ref([]);
+
+// Una vez montada la aplicacion, determino si cotizaciones va a ser 'cotizaciones_admin' o 'cotizaciones_user' en base al valor de 'isAdmin'
+onMounted(() => {
+    cotizaciones.value = isAdmin.value ? cotizaciones_admin.value : cotizaciones_user.value;
+});
 
 const formatCurrency = (value) => {
     return new Intl.NumberFormat('es-AR', {
@@ -45,7 +43,10 @@ const formatCurrency = (value) => {
         <!-- Page Heading -->
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Cotizaciones
+                Cotizaciones 
+                <span v-if="isAdmin" class="bg-green-700 text-white px-2 rounded">
+                    ADMIN
+                </span>
             </h2>
         </template>
 
@@ -64,7 +65,7 @@ const formatCurrency = (value) => {
                             <div class="flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                                 <div class="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
                                     <div class="flex flex-col justify-start items-start px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
-                                            <div v-if="cotizaciones.length > 0"     v-for="cotizacion in cotizaciones" :key="cotizacion.id"     class="mb-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
+                                            <div v-if="cotizaciones?.length > 0"     v-for="cotizacion in cotizaciones" :key="cotizacion.id"     class="mb-6 flex flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full">
                                                 <div class="border-b border-gray-200 md:flex-row flex-col flex justify-between items-start w-full pb-8 space-y-4 md:space-y-0">
                                                     <div class="w-full flex flex-col justify-start items-start space-y-8">
                                                         <!-- Fecha con el paquete 'dayjs' -->

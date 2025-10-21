@@ -7,6 +7,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
+     * @property int $user_id
      * @property string|null $direccion
      * @property string|null $email
      * @property string|null $telefono
@@ -20,6 +21,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereTelefono($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereEmail($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereDireccion($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereUserId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente newModelQuery()
@@ -1611,6 +1613,7 @@ namespace App\Models {
      *
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
+     * @property bool $is_admin
      * @property string|null $profile_photo_path
      * @property int|null $current_team_id
      * @property string|null $remember_token
@@ -1638,6 +1641,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereRememberToken($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCurrentTeamId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereProfilePhotoPath($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereIsAdmin($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<User>|User newModelQuery()

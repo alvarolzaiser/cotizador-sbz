@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Alvaro Ledesma Zaiser',
             'email' => 'alvarozaiser@gmail.com',
+            'is_admin' => 1,
         ]);
 
         Cliente::factory()->create([
