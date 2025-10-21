@@ -78,6 +78,7 @@ const finalizarCotizacion = async () => {
             telefono: telefono.value ? telefono.value : '3518019558',
             email: email.value ? email.value : 'ejemplo@ejemplo.com',
             direccion: direccion.value ? direccion.value : 'Ejemplo',
+            user_id: usePage().props.auth.user.id,
 
             total: total.value,
 

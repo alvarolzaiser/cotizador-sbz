@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('telefono')->nullable();
             $table->string('email')->nullable();
             $table->string('direccion')->nullable();
+            // Sirve para mostrar a cada usuario solo sus clientes
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }

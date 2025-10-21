@@ -66,7 +66,9 @@ class CotizacionController extends Controller
                     'telefono' => 'nullable|string|max:255',
                     'email' => 'nullable|string|max:255',
                     'direccion' => 'nullable|string|max:255',
+                    'user_id' => 'required|numeric'
                 ]);
+
                 // Creamos el cliente
                 $clienteNuevo = Cliente::create($validate);
                 // Obtenemos el ID del cliente recien creado

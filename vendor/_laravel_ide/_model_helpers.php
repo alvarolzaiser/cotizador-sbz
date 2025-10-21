@@ -14,6 +14,7 @@ namespace App\Models {
      * @property int $id
      * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Cotizacion> $cotizaciones
      * @property-read int|null $cotizaciones_count
+     * @property-read \App\Models\User $user
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereNombre($value)
      * @method static \Illuminate\Database\Eloquent\Builder<Cliente>|Cliente whereTelefono($value)

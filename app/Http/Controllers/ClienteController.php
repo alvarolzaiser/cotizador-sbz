@@ -17,6 +17,7 @@ class ClienteController extends Controller
     {
         // Obtengo todos los clientes
         $clientes = Cliente::query()
+                            ->where('user_id', auth()->user()->id)
                             ->orderBy('created_at', 'desc')
                             ->get();
 
@@ -101,6 +102,8 @@ class ClienteController extends Controller
                         ->orWhere('email', 'LIKE', "%{$searchQuery}%")
                         ->orWhere('direccion', 'LIKE', "%{$searchQuery}%");
             })
+            ->andWhere('user_id', $request->user()->id) // Asegura que solo se busquen clientes del usuario autenticado
+            // El 'user_id' es un campo que tiene cada cliente y determina quien creó el usuario, para no mostrar clientes de vendedores diferentes.
             ->get();
             
         return response()->json([

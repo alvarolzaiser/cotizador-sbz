@@ -30,7 +30,10 @@ Route::middleware([
         // Ruta para acceder al carrito
         Route::get('/carrito', function(){
             return Inertia::render('Carrito/Cart', [
-                'clientes' => Cliente::all(),
+                'clientes' => Cliente::query()
+                            ->where('user_id', auth()->user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->get(),
             ]);
         })->name('carrito');
 

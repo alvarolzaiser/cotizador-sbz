@@ -88,7 +88,7 @@ const saveCliente = async(cliente) => {
                                 <div class="flex justify-center">
                                     <!-- Contenedor para desplazamiento horizontal -->
                                     <div class="w-full overflow-x-auto">
-                                        <table class="w-full text-md bg-white shadow-md rounded">
+                                        <table v-if="localClientes.length > 0" class="w-full text-md bg-white shadow-md rounded">
                                             <tbody>
                                                 <tr class="border-b">
                                                     <th class="text-left p-3 px-5">Nombre</th>
@@ -120,12 +120,12 @@ const saveCliente = async(cliente) => {
                                                         <button v-else @click="startEditing(cliente)" type="button" class="mr-3 text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline">Editar</button>
                                                     </td>
                                                 </tr>
-                                                <tr v-else class="text-gray-500 p-10 flex flex-col justify-center">
-                                                    <!-- Texto en caso que no haya elementos -->
-                                                    <p class="text-center text-lg">Aun no hay clientes. Realiza una cotizacion <Link :href="route('dashboard')" class="text-blue-500 font-bold">aquí</Link> para crearlos</p>
-                                                </tr>
                                             </tbody>
                                         </table>
+                                        <tr v-else class="bg-white text-gray-500 p-10 flex flex-col justify-center">
+                                            <!-- Texto en caso que no haya elementos -->
+                                            <p class="text-center text-lg">Aun no hay clientes. Realiza una cotizacion <Link :href="route('dashboard')" class="text-blue-500 font-bold">aquí</Link> para crearlos</p>
+                                        </tr>
                                     </div>
                                 </div>
                             </div>

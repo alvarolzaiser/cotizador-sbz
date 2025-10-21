@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
             'nombre' => 'X',
             'telefono' => '3518019558',
             'direccion' => 'X',
-            'email' => 'ejemplo@ejemplo.com'
+            'email' => 'ejemplo@ejemplo.com',
+            'user_id' => 1,
         ]);
 
         // Editamos el seeder principal (DatabaseSeeder.php) para que se ejecute el comando `php artisan neumaticos:fill` cada vez que ejecutamos ``php artisan migrate:fresh --seed``

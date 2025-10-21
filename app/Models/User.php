@@ -70,4 +70,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cotizacion::class, 'user_id');
     }
+
+    // Relación: Un user puede tener muchos clientes
+    protected function cliente()
+    {
+        return $this->hasMany(Cliente::class, 'user_id');
+    }
 }
