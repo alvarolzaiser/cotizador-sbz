@@ -197,7 +197,10 @@ const formatCurrency = (value) => {
                             </p>
                         </div>
                         <!-- Archive de productos -->
-                        <div v-if="productos.length > 0" v-for="product in productos" :key="product.id" class="mb-4 p-4 bg-gray-100 rounded shadow">
+                        <div v-if="productos.length > 0" v-for="product in productos" :key="product.id" 
+                            :class="{'bg-red-200': product[selectedPriceType] <= 0 }"
+                            class="mb-4 p-4 bg-gray-100 rounded shadow"
+                        >
                             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
                                 <div class="flex flex-row gap-4">
                                     <!-- Imagen -->
@@ -243,14 +246,24 @@ const formatCurrency = (value) => {
                                         min="0" 
                                         :max="product.stock"
                                         class="w-16 border p-2 mr-2 text-center rounded-md"
-                                        :disabled="quantity[product.id] <= 0 || product.stock <= 0"
-                                        :class="{ 'opacity-50 cursor-not-allowed': quantity[product.id] <= 0 || product.stock <= 0 }"
+                                        :disabled="quantity[product.id] <= 0 || product.stock <= 0 || product[selectedPriceType] <= 0"
+                                        :class="{ 'opacity-50 cursor-not-allowed': quantity[product.id] <= 0 || product.stock <= 0 || product[selectedPriceType] <= 0}"
                                     >
                                     <button 
                                         @click="addToCart(product)" 
-                                        :disabled="quantity[product.id] <= 0 || product.stock <= 0 || quantity[product.id] > product.stock"
+                                        :disabled="
+                                            quantity[product.id] <= 0 
+                                            || product.stock <= 0 
+                                            || quantity[product.id] > product.stock
+                                            || product[selectedPriceType] <= 0
+                                        "
                                         class="bg-blue-500 text-white px-4 py-2 rounded"
-                                        :class="{ 'opacity-50 cursor-not-allowed': quantity[product.id] <= 0 || product.stock <= 0 || quantity[product.id] > product.stock }"
+                                        :class="{ 'opacity-50 cursor-not-allowed': 
+                                                        quantity[product.id] <= 0 
+                                                        || product.stock <= 0 
+                                                        || quantity[product.id] > product.stock 
+                                                        || product[selectedPriceType] <= 0 
+                                        }"
                                     >
                                         Agregar
                                     </button>

@@ -70,6 +70,7 @@ class FillProductosTable extends Command
                 $subfamilia     = (string) $node->SUBFAMILIA;
                 $stock          = (int)    $node->STOCK;
                 $precioVenta    = (float)  $node->PRECIOVENTA;
+                $precioMayorista = (float) $node->PRECIOVENTA__AUX;
 
                 if (empty($sku)) {
                     $this->error("Omitido: SKU vacío");
@@ -78,7 +79,7 @@ class FillProductosTable extends Command
                     $skusApi[] = $sku;
                     $batch[] = compact(
                         'sku','titulo','familia','subfamilia',
-                        'stock','precioVenta'
+                        'stock','precioVenta', 'precioMayorista'
                     );
                 }
 
@@ -139,6 +140,7 @@ class FillProductosTable extends Command
                         'subfamilia'        => $item['subfamilia'],
                         'stock'             => $item['stock'],
                         'precio_normal'      => $item['precioVenta'],
+                        'precio_mayorista'  => $item['precioMayorista'],
                     ]
                 );
                 $guardados++;
