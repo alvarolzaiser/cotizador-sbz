@@ -31,7 +31,7 @@ Route::middleware([
         Route::get('/carrito', function(){
             return Inertia::render('Carrito/Cart', [
                 'clientes' => Cliente::query()
-                            ->where('user_id', auth()->user()->id)
+                            // ->where('user_id', auth()->user()->id) // Solo clientes creados por el usuario
                             ->orderBy('created_at', 'desc')
                             ->get(),
             ]);
